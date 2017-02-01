@@ -457,8 +457,12 @@ static VALUE ta_func_call(VALUE self, VALUE in_start, VALUE in_end)
     sub_ary = rb_ary_entry(ary, i);
     for (j=0; j<out_num; j++)
     {
+      /*
       double el = ((double*)param_holder->out[i])[j];
       rb_ary_store(sub_ary, j, rb_float_new(el));
+      */
+      int el = ((int*)param_holder->out[i])[j];
+      rb_ary_store(sub_ary, j, INT2FIX(el));
     }
   }
   return rb_ary_new3(2, INT2FIX(out_start), INT2FIX(out_num));
