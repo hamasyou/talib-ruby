@@ -455,14 +455,15 @@ static VALUE ta_func_call(VALUE self, VALUE in_start, VALUE in_end)
   if (TYPE(rb_ary_entry(ary, i)) == T_ARRAY)
   {
     sub_ary = rb_ary_entry(ary, i);
-    VALUE *result = (VALUE*) param_holder->out[i];
-    rb_ary_store(ary, i, rb_ary_new4(out_num, result));
-
-    // for (j=0; j<out_num; j++)
-    // {
-    //   double el = ((double*)param_holder->out[i])[j];
-    //   rb_ary_store(sub_ary, j, rb_float_new(el));
-    // }
+    for (j=0; j<out_num; j++)
+    {
+      /*
+      double el = ((double*)param_holder->out[i])[j];
+      rb_ary_store(sub_ary, j, rb_float_new(el));
+      */
+      VALUE el = ((VALUE*)param_holder->out[i])[j];
+      rb_ary_store(sub_ary, j, el);
+    }
   }
   return rb_ary_new3(2, INT2FIX(out_start), INT2FIX(out_num));
 }
