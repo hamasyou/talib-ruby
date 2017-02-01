@@ -342,7 +342,7 @@ static VALUE ta_func_setup_in_price(VALUE self, VALUE param_index, VALUE in_open
     if ( ret_code != TA_SUCCESS )
         rb_raise(rb_eRuntimeError, "unsuccess return code TA_SetInputParamPricePtr");
 
-    return T_FALSE;
+    return Qtrue;
 }
 
 /*
