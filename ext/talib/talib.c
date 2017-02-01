@@ -461,7 +461,7 @@ static VALUE ta_func_call(VALUE self, VALUE in_start, VALUE in_end)
       double el = ((double*)param_holder->out[i])[j];
       rb_ary_store(sub_ary, j, rb_float_new(el));
       */
-      VALUE el = ((VALUE*)param_holder->out[i])[j];
+      VALUE el = (VALUE)((int*)param_holder->out[i])[j];
       rb_ary_store(sub_ary, j, el);
     }
   }
