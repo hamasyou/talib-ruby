@@ -447,8 +447,12 @@ static VALUE ta_func_call(VALUE self, VALUE in_start, VALUE in_end)
   int i,j;
 
   VALUE name = rb_iv_get(self, "@name");
+  printf("name: %s", StringValuePtr(name));
+
   const TA_FuncHandle *handle;
   TA_GetFuncHandle( StringValuePtr(name), &handle );
+
+  printf("func handle");
 
   Data_Get_Struct(self, ParamHolder, param_holder);
   ret_code = TA_CallFunc( param_holder->p, FIX2INT(in_start), FIX2INT(in_end), &out_start, &out_num);
@@ -467,6 +471,8 @@ static VALUE ta_func_call(VALUE self, VALUE in_start, VALUE in_end)
       */
       const TA_OutputParameterInfo *param_info;
       TA_GetOutputParameterInfo( handle, FIX2INT(i), &param_info );
+
+      printf("output param");
 
       if (param_info->type == TA_Output_Integer) {
         // int el = ((int*)param_holder->out[i])[j];
