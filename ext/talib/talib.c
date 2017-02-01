@@ -461,8 +461,16 @@ static VALUE ta_func_call(VALUE self, VALUE in_start, VALUE in_end)
       double el = ((double*)param_holder->out[i])[j];
       rb_ary_store(sub_ary, j, rb_float_new(el));
       */
-      VALUE el = (VALUE)((int*)param_holder->out[i])[j];
-      rb_ary_store(sub_ary, j, el);
+      const TA_OutputParameterInfo *param_info;
+      TA_GetOutputParameterInfo( handle, FIX2INT(i), &param_info );
+
+      if (param_info->type == TA_Output_Integer) {
+        int el = ((int*)param_holder->out[i])[j];
+        rb_ary_store(sub_ary, j, INT2FIX(el));
+      } else {
+        double el = (VALUE)((double*)param_holder->out[i])[j];
+        rb_ary_store(sub_ary, j, rb_float_new(el));
+      }
     }
   }
   return rb_ary_new3(2, INT2FIX(out_start), INT2FIX(out_num));
