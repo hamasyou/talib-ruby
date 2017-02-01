@@ -469,7 +469,7 @@ static VALUE ta_func_call(VALUE self, VALUE in_start, VALUE in_end)
       TA_GetOutputParameterInfo( handle, i, &param_info );
 
       if (param_info->type == TA_Output_Integer) {
-        int el = ((int*)param_holder->out[i])[j];
+        int el = ((double*)param_holder->out[i])[j];
         rb_ary_store(sub_ary, j, INT2FIX(el));
       } else {
         double el = ((double*)param_holder->out[i])[j];
